@@ -7,12 +7,14 @@ import re
 import json
 
 from flask import Flask
+from app import * 
 
 
+# flask 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
 
-
+# slack api token 
 SLACKBOT_API_TOKEN = os.environ.get("SLACKBOT_API_TOKEN")
 
 
@@ -54,22 +56,25 @@ def hi(message):
     # react with thumb up emoji
     message.react('+1')
 
-@respond_to('I love you')
-def love(message):
-    message.reply('I love you too!')
+@respond_to('data plz')
+def data(message):
+    df = sample_data()
+    message.reply( "```"+str(df) + "```")
+
+@respond_to('echo (.*)')
+def echo_word(message,something):
+    feedback = regular_response(something)
+    message.reply(feedback)
+
+
+@respond_to('Give me (.*)')
+def giveme(message, something):
+    message.reply('Here is {}'.format(something))
 
 
 @respond_to('test now')
 def test(message):
     message.reply('OK ROGER THAT !')
-
-@listen_to('Can someone help me?')
-def help(message):
-    # Message is replied to the sender (prefixed with @user)
-    message.reply('Yes, I can!')
-
-    # Message is sent on the channel
-    # message.send('I can help everybody!')
 
 #=======================================
 
