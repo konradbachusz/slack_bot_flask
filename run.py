@@ -29,9 +29,9 @@ def main():
 
 @app.route('/')
 def run_bot():
-	bot = Bot()
+    bot = Bot()
     bot.run()
-	return 'RUN slack bot now' 
+    return 'RUN slack bot now' 
 
 
 # Respond 
