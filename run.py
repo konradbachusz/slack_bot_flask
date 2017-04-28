@@ -30,7 +30,7 @@ def main():
 @app.route('/')
 def run_bot():
 	bot = Bot()
- 	bot.run()
+    bot.run()
 	return 'RUN slack bot now' 
 
 
