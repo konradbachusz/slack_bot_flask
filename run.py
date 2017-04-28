@@ -76,11 +76,16 @@ def giveme(message, something):
 def test(message):
     message.reply('OK ROGER THAT !')
 
+
+@listen_to('help me')
+def help(message):
+    message.reply('Yes, I can!')
+
 #=======================================
 
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0',threaded=True,debug = True)
+	app.run(host='0.0.0.0', port=8000,threaded=True,debug = True)
 	#main()
 
 
