@@ -37,17 +37,6 @@ def run_bot():
 # Respond 
 #=======================================
 
-@respond_to('github', re.IGNORECASE)
-def github():
-    attachments = [
-    {
-        'fallback': 'Fallback text',
-        'author_name': 'Author',
-        'author_link': 'http://www.github.com',
-        'text': 'Some text',
-        'color': '#59afe1'
-    }]
-    message.send_webapi('', json.dumps(attachments))
 
 
 @respond_to('hi', re.IGNORECASE)
@@ -70,6 +59,13 @@ def echo_word(message,something):
 @respond_to('Give me (.*)')
 def giveme(message, something):
     message.reply('Here is {}'.format(something))
+
+
+
+@respond_to('spotify (.*)')
+def reply_album(message, artist):
+    df = spotify_album(artist)
+    message.reply("```" + 'ALBUM : {}'.format(df) +  "```")
 
 
 @respond_to('test now')
