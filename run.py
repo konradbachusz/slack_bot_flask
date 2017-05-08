@@ -8,6 +8,8 @@ import json
 
 from flask import Flask
 from app import * 
+from backup_msg_db import * 
+
 
 
 # flask 
@@ -16,6 +18,38 @@ app.config['SECRET_KEY'] = 'hard to guess string'
 
 # slack api token 
 SLACKBOT_API_TOKEN = os.environ.get("SLACKBOT_API_TOKEN")
+
+
+
+# sqlite backup msg data 
+#=======================================
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime
+
+engine = create_engine('sqlite:///msg.db', echo=False)
+
+Base = declarative_base()
+
+class input_msg(Base):
+    """
+    A table to store data on craigslist listings.
+    """
+
+    __tablename__ = 'msg'
+
+    id = Column(Integer, primary_key=True)
+    created = Column(DateTime)
+    msg = Column(String)
+
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+session = Session()
+#=======================================
+
 
 
 # running bot by flask 
@@ -70,7 +104,14 @@ def reply_album(message, artist):
 
 @respond_to('test now')
 def test(message):
+    listing  =  input_msg(
+        created = datetime.now(),
+        msg = str("how r u ?")
+        ) 
+    session.add(listing)
+    session.commit()
     message.reply('OK ROGER THAT !')
+
 
 
 @listen_to('help me')
