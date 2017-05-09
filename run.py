@@ -102,21 +102,33 @@ def reply_album(message, artist):
     message.reply("```" + 'ALBUM : {}'.format(df) +  "```")
 
 
-@respond_to('test now')
-def test(message):
-    listing  =  input_msg(
-        created = datetime.now(),
-        msg = str("how r u ?")
-        ) 
+@respond_to('test now (.*)')
+def test(message,input):
+    listing  =  input_msg(created = datetime.now(),
+                          msg = str(input)) 
     session.add(listing)
     session.commit()
     message.reply('OK ROGER THAT !')
 
 
 
-@listen_to('help me')
+@respond_to('help me')
 def help(message):
     message.reply('Yes, I can!')
+
+@respond_to('sql backup')
+def input_log(message):
+    #listing = session.query(input_msg)
+    history = ''
+    for item in session.execute("select * from msg"):
+        history += str(item) + "\n" 
+    #print (session.fetchall())
+    session.commit()
+    #print (session)
+    #print (listing)
+    message.reply("OK")
+    message.reply("```" + str(history) + "```")
+
 
 #=======================================
 
