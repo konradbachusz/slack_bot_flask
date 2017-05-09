@@ -1,8 +1,13 @@
+#  set up sqlite objects and import them to run.py 
+
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
+
+
 
 engine = create_engine('sqlite:///msg.db', echo=False)
 
