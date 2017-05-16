@@ -96,7 +96,14 @@ def help(message):
     print (message)
     message.reply('ok lets upload')
     upload_file()
-    
+   
+@respond_to('sample me')
+def sample(message):
+    message.reply('ok')
+    print (message)
+    message.reply('ok lets upload')
+    upload_created_file()
+
 
 @respond_to('sql backup')
 def input_log(message):
