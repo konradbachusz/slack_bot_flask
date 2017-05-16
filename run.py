@@ -57,7 +57,10 @@ def hi(message):
 @respond_to('data plz')
 def data(message):
     df = sample_data()
+    df.to_csv('/Users/yennanliu/Desktop/df_test.csv')
     message.reply( "```"+str(df) + "```")
+    #@respond_to("upload /Users/yennanliu/Desktop/df_test.csv")
+    message.reply( "Upload OK ")
 
 @respond_to('echo (.*)')
 def echo_word(message,something):
@@ -89,7 +92,11 @@ def test(message,input):
 
 @respond_to('help me')
 def help(message):
-    message.reply('Yes, I can!')
+    message.reply('ok')
+    print (message)
+    message.reply('ok lets upload')
+    upload_file()
+    
 
 @respond_to('sql backup')
 def input_log(message):

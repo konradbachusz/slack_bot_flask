@@ -5,6 +5,20 @@ import os
 
 
 
+
+
+# ========================
+
+
+from slackbot.bot import respond_to
+from slackbot.utils import download_file, create_tmp_file
+
+
+SLACKBOT_API_TOKEN = os.environ.get("SLACKBOT_API_TOKEN")
+
+
+
+
 def sample_data():
 	dates = pd.date_range('20130101',periods=6)
 	df = pd.DataFrame(np.random.randn(6,4),index=dates,columns=list('ABCD'))
@@ -16,6 +30,31 @@ def regular_response(word):
 	print (word)
 	return word + '@@' 
 
+
+
+def upload_file():
+	command = """
+	
+	curl -F file=@/Users/yennanliu/Desktop/df_test.csv -F  \
+	channels=C53U3HA4W,#general -F  \
+	token="{}"  \
+	https://slack.com/api/files.upload
+
+	""".format(SLACKBOT_API_TOKEN)
+	print (command)
+	try:
+		print ('start upload file')
+		os.system(command)
+		print ('upload OK')
+	except:
+		print ('upload failed')
+
+
+
+
+
+
+# ========================
 
 
 def spotify_album(artist):
