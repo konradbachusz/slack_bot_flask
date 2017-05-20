@@ -54,7 +54,7 @@ def upload_created_file():
 	command = """
 	
 	curl -F file=@sample.csv -F  \
-	channels=C53U3HA4W,#general -F  \
+	channels=C53U3HA4W,#bot_testing -F  \
 	token="{}"  \
 	https://slack.com/api/files.upload
 
