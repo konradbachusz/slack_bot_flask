@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from flask import Flask, request
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
@@ -12,7 +15,7 @@ e = create_engine('sqlite:///movie_metadata.db')
 app = Flask(__name__)
 api = Api(app)
 
-
+# Get 
 #=======================================
 
 
@@ -42,10 +45,29 @@ class Sample_movie_meta(Resource):
         result = {'meta_data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return result
 
-
+# Delete
 #=======================================
 
+#class delete_movie_data(Resource):
+#    def delete(self, movie_name):
+#        conn = e.connect()
+#        query = conn.execute("delete from movie where movie_title = '%s'"%movie_name)
+#        conn.commit()
+#        result = conn.execute("select count(*) from movie")
+#        return result 
 
+
+#@app.route('/delete_movie/<string:movie_name>', methods = ['DELETE'])
+#def delete(self, movie_name):
+#        conn = e.connect()
+#        #del_st = user_t.delete().where(user_t.c.l_name == 'Hello')    
+#        conn.delete(movie_title == 'Tangled')  
+#        conn.execute() 
+#
+#        result = conn.execute("select count(*) from movie")
+#        return result 
+
+#=======================================
 
 
 
@@ -53,6 +75,9 @@ class Sample_movie_meta(Resource):
 api.add_resource(Director_Meta, '/Director_Meta')
 api.add_resource(Country_imdb_meta, '/countryname/<string:country_name>')
 api.add_resource(Sample_movie_meta, '/moviedata/<string:limit_count>')
+
+#api.add_resource(delete_movie_data, '/delete_movie/<string:movie_name>')
+
 
 
 
