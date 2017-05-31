@@ -30,7 +30,7 @@ class Director_Meta(Resource):
 class Country_imdb_meta(Resource):
     def get(self, country_name):
         conn = e.connect()
-        query = conn.execute("select * from movie where country='%s'"%country_name.upper())
+        query = conn.execute("select * from movie where country='%s'"%country_name)
 
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return result
@@ -47,6 +47,10 @@ class Sample_movie_meta(Resource):
 
 # Delete
 #=======================================
+
+# http://blog.cloudoki.com/getting-started-with-restful-apis-using-the-flask-microframework-for-python/
+# http://www.bradcypert.com/writing-a-restful-api-in-flask-sqlalchemy/
+
 
 #class delete_movie_data(Resource):
 #    def delete(self, movie_name):
