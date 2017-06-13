@@ -9,6 +9,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+# https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import unittest, time, re
 from bs4 import BeautifulSoup
 
@@ -22,7 +24,7 @@ browser.get(base_url)
 
 page = 0                              
 #while len(soup.select('.paging-start')) > 0:
-while page < 2:
+while page < 3:
 	page += 1 
 	try: 
 		#print '======== start parse ========'

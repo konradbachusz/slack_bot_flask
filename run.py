@@ -7,8 +7,8 @@ import re
 import json
 
 from flask import Flask
-from app import * 
-from backup_msg_db import * 
+from app.app import *
+from app.backup_msg_db import * 
 
 
 
