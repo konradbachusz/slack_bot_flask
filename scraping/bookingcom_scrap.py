@@ -24,20 +24,20 @@ browser.get(base_url)
 
 page = 0                              
 #while len(soup.select('.paging-start')) > 0:
-while page < 3:
+while page < 2:
 	page += 1 
 	try: 
 		#print '======== start parse ========'
 		soup = BeautifulSoup(browser.page_source,"html.parser")
-		#for ele in soup.select('.sr_simple_card_inner div h3'):
-		#for ele in soup.find_all('h3',attrs={'class': 'sr_simple_card_hotel_name'}):
-		for ele in soup.find_all('h3'):
+		#for ele in soup.find_all('h3'):
+		for ele in soup.findAll("span", { "class" : "sr-hotel__name" }):
 
 			print ele.text 
 			#print '========content========'
 		# next page 
 		browser.find_element_by_link_text(u"下一頁").click()
 		print 'page =' , page
+		time.sleep(1)
 	except Exception as e:
 		print e, 'something failed'
 
